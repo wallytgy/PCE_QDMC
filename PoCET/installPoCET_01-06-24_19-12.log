@@ -1,0 +1,51 @@
++--------------------------------------------------------------------------------+
+| INSTALLATION                                                                   |
++--------------------------------------------------------------------------------+
+| PoCET (Polynomial Chaos Expansion Toolbox) for MATLAB                          |
+|   by [Petzke et al., 2020]                                                     |
++--------------------------------------------------------------------------------+
+| Copyright (c) 2020 Stefan Streif, stefan.streif@etit.tu-chemnitz.de            |
+| Licensed under the EUPL-1.2-or-later                                           |
++--------------------------------------------------------------------------------+
+Do you accept the licensing conditions? (y/n [n]): y
++--------------------------------------------------------------------------------+
+Searching for previous installation of PoCET...
+Adding search paths for PoCET functions...
+ 
+Your MATLAB installation does not allow the saving of the updated MATLAB path variable.
+This means that you have to add the PoCET folder and all its subfolders to the MATLAB
+path each time you start MATLAB or run this script using the option installPoCET('path'),
+which does that without testing external tools that might be required or other toolboxes.
+ 
+Press any key to continue.
++--------------------------------------------------------------------------------+
+Determining versions of installed toolboxes (this might take few seconds) ...
+
+Checking "MATLAB" installation ...  OK! Installed version: 23.2
+Checking "Symbolic Math Toolbox" installation ...  OK! Installed version: 23.2
+Checking "Optimization Toolbox" installation ...  OK! Installed version: 23.2
+ 
+Press any key to continue.
++--------------------------------------------------------------------------------+
+Creating documentation...
+[Warning: ex3_MCRHS.m does not contain a documentation comment. No html file has been created.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('generateHTMLDoc', 'C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\auxiliary\generateHTMLDoc.m', 124)" style="font-weight:bold">generateHTMLDoc</a> (<a href="matlab: opentoline('C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\auxiliary\generateHTMLDoc.m',124,0)">line 124</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('installPoCET>createDocumentation', 'C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\installPoCET.m', 329)" style="font-weight:bold">installPoCET>createDocumentation</a> (<a href="matlab: opentoline('C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\installPoCET.m',329,0)">line 329</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('installPoCET', 'C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\installPoCET.m', 250)" style="font-weight:bold">installPoCET</a> (<a href="matlab: opentoline('C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\installPoCET.m',250,0)">line 250</a>)] 
+[Warning: ex3_RHS.m does not contain a documentation comment. No html file has been created.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('generateHTMLDoc', 'C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\auxiliary\generateHTMLDoc.m', 124)" style="font-weight:bold">generateHTMLDoc</a> (<a href="matlab: opentoline('C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\auxiliary\generateHTMLDoc.m',124,0)">line 124</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('installPoCET>createDocumentation', 'C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\installPoCET.m', 329)" style="font-weight:bold">installPoCET>createDocumentation</a> (<a href="matlab: opentoline('C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\installPoCET.m',329,0)">line 329</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('installPoCET', 'C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\installPoCET.m', 250)" style="font-weight:bold">installPoCET</a> (<a href="matlab: opentoline('C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\installPoCET.m',250,0)">line 250</a>)] 
+[Warning: my_MCODE.m does not contain a documentation comment. No html file has been created.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('generateHTMLDoc', 'C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\auxiliary\generateHTMLDoc.m', 124)" style="font-weight:bold">generateHTMLDoc</a> (<a href="matlab: opentoline('C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\auxiliary\generateHTMLDoc.m',124,0)">line 124</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('installPoCET>createDocumentation', 'C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\installPoCET.m', 329)" style="font-weight:bold">installPoCET>createDocumentation</a> (<a href="matlab: opentoline('C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\installPoCET.m',329,0)">line 329</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('installPoCET', 'C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\installPoCET.m', 250)" style="font-weight:bold">installPoCET</a> (<a href="matlab: opentoline('C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\installPoCET.m',250,0)">line 250</a>)] 
+[Warning: my_ODE.m does not contain a documentation comment. No html file has been created.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('generateHTMLDoc', 'C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\auxiliary\generateHTMLDoc.m', 124)" style="font-weight:bold">generateHTMLDoc</a> (<a href="matlab: opentoline('C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\auxiliary\generateHTMLDoc.m',124,0)">line 124</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('installPoCET>createDocumentation', 'C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\installPoCET.m', 329)" style="font-weight:bold">installPoCET>createDocumentation</a> (<a href="matlab: opentoline('C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\installPoCET.m',329,0)">line 329</a>)
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('installPoCET', 'C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\installPoCET.m', 250)" style="font-weight:bold">installPoCET</a> (<a href="matlab: opentoline('C:\Users\kkgankoWin\Dropbox (MIT)\PoCET\installPoCET.m',250,0)">line 250</a>)] 
+
+Note: You might have to restart Matlab once in order to 
+refresh help paths and to use the PoCET documentation.
+ 
+Press any key to continue.

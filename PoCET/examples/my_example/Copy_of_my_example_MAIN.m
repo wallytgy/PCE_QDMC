@@ -1,0 +1,100 @@
+clc, clear all, close all
+addpath(genpath('../../../PoCET'));
+%%
+
+states(1).name = 'c_A';
+states(1).dist = 'none';
+states(1).data = 0.8;
+states(1).rhs = 'F *(c_A0 - c_A) - (1+0.1*b) *k_01 *exp(-E_A1/( R *(T_R + 273.15) )) *c_A - k_03 *exp(-(1+0.1 *a) *E_A3/( R *(T_R + 273.15) ) )  *c_A^2';
+
+states(2).name = 'c_B';
+states(2).dist = 'none';
+states(2).data = 0.5;
+states(2).rhs = '-F *c_B +  (1+0.1*b) *k_01 *exp(-E_A1/( R *(T_R + 273.15) )) *c_A - k_02 *exp(-E_A2/( R *(T_R + 273.15) ))  *c_B';
+
+states(3).name = 'T_R';
+states(3).dist = 'none';
+states(3).data = 134.14;
+states(3).rhs = 'F *(T_in - T_R) + k_W *A / ( rho *c_p *V_R ) *(T_K - T_R) - 1 / ( rho *c_p ) *((1+0.1*b) *k_01 *exp(-E_A1/( R *(T_R + 273.15) )) *c_A *DeltaH_AB + k_02 *exp(-E_A2/( R *(T_R + 273.15) )) *c_B *DeltaH_BC + k_03 *exp(-(1+0.1 *a) *E_A3/( R *(T_R + 273.15) ) ) *c_A^2 *DeltaH_AD)'
+
+states(4).name = 'T_K';
+states(4).dist = 'none';
+states(4).data = 134;
+states(4).rhs = '1/(m_K*c_pK)*(Q_K + k_W *A *(T_R - T_K))';
+
+%%
+parameter_names = {'c_A0','k_01', 'k_02', 'k_03','E_A1','E_A2' ,'E_A3', 'R', 'DeltaH_AB', 'DeltaH_BC','DeltaH_AD','rho','c_p','c_pK','A','V_R','m_K','T_in','k_W','Q_K','a','b'}
+parameter_dist = cell(1,length(parameter_names))
+for idx = 1:(length(parameter_names) - 2)
+    parameter_dist{idx} = 'none'
+end
+parameter_dist{length(parameter_names)-1} = 'uniform'
+parameter_dist{length(parameter_names)} = 'uniform'
+
+parameter_data =  {3, 1.287*1e12 , 1.287*1e12 , 9.043 *10^9 , 9758.3 *8.314 / 1000 ,  9758.3 *8.314 / 1000 , 7704 *8.314 / 1000, 8.314 / 1000 , 4.2, -11, -41.85, 0.9342, 3.01, 2, 0.215, 10.01, 5, 130, 4032, -4500, [-1,1], -[1,1]}
+
+parameters = struct('name', parameter_names, 'dist', parameter_dist, 'data', parameter_data)
+
+%%
+inputs(1).name = 'F';
+inputs(1).rhs  = 'piecewise(u_t, u_v, t)';
+inputs(1).u_t = [-0.1]
+inputs(1).u_v = [20]
+
+%% define simulation options
+simopt.tspan = [0, 3];
+simopt.dt = 0.02;
+simopt.setup = odeset;
+simopt.solver = 'ode45';
+
+mc_samples = 1e2;
+col_samples = 1e2;
+pce_order = 4;
+
+
+%% (1.c) compose the PCE system and write file for PCE-ODE and MC simulations
+% mySystem = PoCETcompose(states, parameters, inputs, options);
+sys = PoCETcompose(states,parameters,inputs,[],pce_order);
+MomMats = PoCETmomentMatrices(sys,pce_order);
+PoCETwriteFiles(sys,'my_ODE.m','my_OUT.m','my_MCODE.m','my_MCOUT.m')
+
+%% (2.a) simulate system and compute moments
+% run PCE simulation
+n_samples = 1000
+basis = PoCETsample(sys, 'basis',n_samples)
+col_results = PoCETsimCollocation(sys,'my_MCODE',[],basis,simopt)
+
+%%
+
+% compute moments from simulation results
+sys.MomMats = PoCETmomentMatrices(sys,4);
+col_results.c_A.moments = PoCETcalcMoments(sys,sys.MomMats,col_results.c_A.pcvals);
+col_results.c_B.moments = PoCETcalcMoments(sys,sys.MomMats,col_results.c_B.pcvals);
+
+
+%%
+% plot results of both simulations
+figure(1) % central moments of state 1
+subplot(2,2,1); plot(col_results.time,col_results.c_A.moments(1,:),'r'); title('Mean')
+subplot(2,2,2); plot(col_results.time,col_results.c_A.moments(2,:),'r'); title('Variance')
+subplot(2,2,3); plot(col_results.time,col_results.c_A.moments(3,:),'r'); title('Skewness')
+subplot(2,2,4); plot(col_results.time,col_results.c_A.moments(4,:),'r'); title('Excess Kurtosis')
+
+figure(2) % central moments of state 2
+subplot(2,2,1); plot(col_results.time,col_results.c_B.moments(1,:),'r'); title('Mean')
+subplot(2,2,2); plot(col_results.time,col_results.c_B.moments(2,:),'r'); title('Variance')
+subplot(2,2,3); plot(col_results.time,col_results.c_B.moments(3,:),'r'); title('Skewness')
+subplot(2,2,4); plot(col_results.time,col_results.c_B.moments(4,:),'r'); title('Excess Kurtosis')
+
+
+
+
+
+
+
+
+
+
+
+
+              
